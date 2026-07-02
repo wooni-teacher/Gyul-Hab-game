@@ -6,26 +6,33 @@
     <title>스테레오 마인드 🎵</title>
 
     <!-- 강원교육체 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/webfontworld/gangwon/GangwonEdu.css">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        @font-face {
+            font-family: 'GangwonEdu';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'GangwonEdu', sans-serif !important;
+            font-family: 'GangwonEdu', 'Nanum Gothic', sans-serif !important;
         }
 
         :root {
-            --pastel-pink: #FFD6E0;
+            --pastel-pink:   #FFD6E0;
             --pastel-purple: #E8D5F5;
-            --pastel-blue: #D6EAF8;
-            --pastel-green: #D5F5E3;
+            --pastel-blue:   #D6EAF8;
+            --pastel-green:  #D5F5E3;
             --pastel-yellow: #FFF9C4;
             --pastel-orange: #FFE0CC;
-            --text-dark: #5a5a7a;
-            --text-medium: #7a7a9a;
-            --shadow: rgba(180, 160, 200, 0.3);
+            --text-dark:     #5a5a7a;
+            --text-medium:   #7a7a9a;
+            --shadow:        rgba(180, 160, 200, 0.3);
         }
 
         body {
@@ -43,21 +50,20 @@
             max-width: 900px;
             animation: fadeIn 0.5s ease;
         }
-
         .screen.active { display: block; }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255,255,255,0.85);
             backdrop-filter: blur(10px);
             border-radius: 30px;
             padding: 40px;
             box-shadow: 0 10px 40px var(--shadow);
-            border: 2px solid rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(255,255,255,0.9);
         }
 
         .title-main {
@@ -79,36 +85,30 @@
             padding: 15px 35px;
             border: none;
             border-radius: 50px;
-            font-family: 'GangwonEdu', sans-serif !important;
+            font-family: 'GangwonEdu', 'Nanum Gothic', sans-serif !important;
             font-size: 1.2rem;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px var(--shadow);
         }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px var(--shadow);
-        }
-
+        .btn:hover  { transform: translateY(-3px); box-shadow: 0 8px 25px var(--shadow); }
         .btn:active { transform: translateY(0); }
 
-        .btn-primary  { background: linear-gradient(135deg, #c9a0f5, #a0c4f5); color: white; }
-        .btn-secondary{ background: linear-gradient(135deg, #f5a0c9, #f5c9a0); color: white; }
-        .btn-success  { background: linear-gradient(135deg, #a0f5c9, #a0f5e8); color: var(--text-dark); }
-        .btn-danger   { background: linear-gradient(135deg, #f5a0a0, #f5c4a0); color: white; }
-        .btn-small    { padding: 8px 20px; font-size: 1rem; }
+        .btn-primary   { background: linear-gradient(135deg, #c9a0f5, #a0c4f5); color: white; }
+        .btn-secondary { background: linear-gradient(135deg, #f5a0c9, #f5c9a0); color: white; }
+        .btn-success   { background: linear-gradient(135deg, #a0f5c9, #a0f5e8); color: var(--text-dark); }
+        .btn-danger    { background: linear-gradient(135deg, #f5a0a0, #f5c4a0); color: white; }
+        .btn-small     { padding: 8px 20px; font-size: 1rem; }
 
         input[type="text"],
         input[type="password"],
         input[type="number"],
-        textarea,
-        select {
+        textarea, select {
             width: 100%;
             padding: 12px 20px;
             border: 2px solid var(--pastel-purple);
             border-radius: 15px;
-            font-family: 'GangwonEdu', sans-serif !important;
+            font-family: 'GangwonEdu', 'Nanum Gothic', sans-serif !important;
             font-size: 1.1rem;
             color: var(--text-dark);
             background: rgba(255,255,255,0.8);
@@ -116,7 +116,6 @@
             transition: border-color 0.3s;
             margin-bottom: 15px;
         }
-
         input:focus, textarea:focus, select:focus {
             border-color: #c9a0f5;
             background: white;
@@ -157,24 +156,17 @@
             min-width: 200px;
             max-width: 280px;
         }
-
         .mode-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 35px var(--shadow);
             border-color: #c9a0f5;
         }
-
         .mode-card .icon { font-size: 3rem; margin-bottom: 15px; }
-        .mode-card h3   { font-size: 1.5rem; color: var(--text-dark); }
-        .mode-card p    { font-size: 1rem; color: var(--text-medium); margin-top: 8px; }
+        .mode-card h3    { font-size: 1.5rem; color: var(--text-dark); }
+        .mode-card p     { font-size: 1rem; color: var(--text-medium); margin-top: 8px; }
 
         /* 탭 */
-        .tab-buttons {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
+        .tab-buttons { display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
 
         .tab-btn {
             padding: 10px 25px;
@@ -182,18 +174,16 @@
             border-radius: 50px;
             background: white;
             color: var(--text-medium);
-            font-family: 'GangwonEdu', sans-serif !important;
+            font-family: 'GangwonEdu', 'Nanum Gothic', sans-serif !important;
             font-size: 1rem;
             cursor: pointer;
             transition: all 0.3s;
         }
-
         .tab-btn.active {
             background: linear-gradient(135deg, #c9a0f5, #a0c4f5);
             color: white;
             border-color: transparent;
         }
-
         .tab-content        { display: none; }
         .tab-content.active { display: block; }
 
@@ -220,11 +210,52 @@
             align-items: center;
             gap: 8px;
         }
-
         .participant-tag .remove-btn {
             cursor: pointer;
             color: #a0a0c0;
             font-size: 1.1rem;
+        }
+
+        /* ===== 참가자 선택 카드 (NEW) ===== */
+        .player-select-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 12px;
+            margin-top: 15px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 5px;
+        }
+
+        .player-select-card {
+            background: linear-gradient(135deg, var(--pastel-purple), var(--pastel-blue));
+            border-radius: 20px;
+            padding: 20px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+        .player-select-card:hover {
+            transform: translateY(-4px) scale(1.04);
+            border-color: #c9a0f5;
+            box-shadow: 0 8px 20px var(--shadow);
+        }
+        .player-select-card:active {
+            transform: scale(0.97);
+        }
+        .player-select-card .ps-icon  { font-size: 2rem; margin-bottom: 8px; }
+        .player-select-card .ps-name  { font-size: 1rem; font-weight: bold; }
+
+        .player-select-card.already-in {
+            background: linear-gradient(135deg, #d5f5e3, #a0f5c9);
+            border-color: #a0f5c9;
+        }
+        .player-select-card.already-in::after {
+            content: ' ✅';
         }
 
         /* 문제 설정 */
@@ -235,33 +266,22 @@
             margin-bottom: 15px;
             border: 2px solid var(--pastel-purple);
         }
-
         .question-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 15px;
         }
-
         .question-header h4 { font-size: 1.2rem; color: var(--text-dark); }
 
-        .options-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 
-        .option-input-wrap {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+        .option-input-wrap { display: flex; align-items: center; gap: 8px; }
 
         .option-num {
             background: var(--pastel-purple);
             color: var(--text-dark);
-            width: 30px;
-            height: 30px;
+            width: 30px; height: 30px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -269,7 +289,6 @@
             font-size: 0.9rem;
             flex-shrink: 0;
         }
-
         .option-input-wrap input { margin-bottom: 0; flex: 1; }
 
         /* 게임 제어 */
@@ -280,20 +299,12 @@
             margin-bottom: 25px;
             text-align: center;
         }
-
-        .game-status-box .status-text  { font-size: 1.3rem; color: var(--text-dark); }
-        .game-status-box .round-info   { font-size: 2rem;   color: var(--text-dark); margin: 10px 0; }
+        .game-status-box .status-text { font-size: 1.3rem; color: var(--text-dark); }
+        .game-status-box .round-info  { font-size: 2rem;   color: var(--text-dark); margin: 10px 0; }
 
         /* 결과 바 */
         .result-bars { margin-top: 20px; }
-
-        .result-bar-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 12px;
-        }
-
+        .result-bar-item { display: flex; align-items: center; gap: 15px; margin-bottom: 12px; }
         .result-bar-label {
             width: 140px;
             font-size: 1rem;
@@ -301,7 +312,6 @@
             text-align: right;
             flex-shrink: 0;
         }
-
         .result-bar-track {
             flex: 1;
             background: rgba(200,180,220,0.2);
@@ -309,7 +319,6 @@
             height: 30px;
             overflow: hidden;
         }
-
         .result-bar-fill {
             height: 100%;
             border-radius: 10px;
@@ -326,7 +335,6 @@
 
         /* 점수판 */
         .scoreboard { display: flex; flex-direction: column; gap: 10px; }
-
         .score-item {
             display: flex;
             align-items: center;
@@ -336,11 +344,9 @@
             padding: 12px 20px;
             border: 2px solid var(--pastel-purple);
         }
-
         .score-item.top-1 { border-color: #FFD700; background: rgba(255,215,0,0.1); }
         .score-item.top-2 { border-color: #C0C0C0; background: rgba(192,192,192,0.1); }
         .score-item.top-3 { border-color: #CD7F32; background: rgba(205,127,50,0.1); }
-
         .score-rank  { font-size: 1.3rem; width: 40px; }
         .score-name  { flex: 1; font-size: 1.2rem; color: var(--text-dark); }
         .score-points{ font-size: 1.5rem; color: #c9a0f5; }
@@ -355,7 +361,6 @@
             margin-bottom: 25px;
             box-shadow: 0 8px 25px var(--shadow);
         }
-
         .youtube-container iframe {
             position: absolute;
             top: 0; left: 0;
@@ -369,13 +374,12 @@
             gap: 15px;
             margin-bottom: 25px;
         }
-
         .option-btn {
             padding: 20px;
             border: 3px solid transparent;
             border-radius: 20px;
             background: rgba(255,255,255,0.8);
-            font-family: 'GangwonEdu', sans-serif !important;
+            font-family: 'GangwonEdu', 'Nanum Gothic', sans-serif !important;
             font-size: 1.2rem;
             color: var(--text-dark);
             cursor: pointer;
@@ -383,22 +387,18 @@
             text-align: center;
             box-shadow: 0 4px 15px var(--shadow);
         }
-
         .option-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 25px var(--shadow);
         }
-
         .option-btn.selected {
             border-color: #c9a0f5;
             background: linear-gradient(135deg, rgba(201,160,245,0.2), rgba(160,196,245,0.2));
             transform: scale(1.02);
         }
-
         .option-btn .opt-num {
             display: inline-block;
-            width: 30px;
-            height: 30px;
+            width: 30px; height: 30px;
             background: var(--pastel-purple);
             border-radius: 50%;
             line-height: 30px;
@@ -408,10 +408,8 @@
 
         /* 타이머 */
         .timer-section { text-align: center; }
-
         .timer-circle {
-            width: 100px;
-            height: 100px;
+            width: 100px; height: 100px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--pastel-purple), var(--pastel-blue));
             display: flex;
@@ -423,17 +421,14 @@
             box-shadow: 0 5px 20px var(--shadow);
             transition: background 0.5s;
         }
-
         .timer-circle.urgent {
             background: linear-gradient(135deg, #f5a0a0, #f5c4a0);
             animation: pulse 0.5s infinite alternate;
         }
-
         @keyframes pulse {
             from { transform: scale(1); }
             to   { transform: scale(1.05); }
         }
-
         .timer-label { font-size: 1rem; color: var(--text-medium); }
 
         /* 제출 상태 */
@@ -444,24 +439,20 @@
             font-size: 1.1rem;
             margin-top: 15px;
         }
-
         .submit-status.submitted   { background: var(--pastel-green);  color: var(--text-dark); }
         .submit-status.waiting-ans { background: var(--pastel-yellow); color: var(--text-dark); }
 
         /* 대기 화면 */
         .waiting-animation { text-align: center; padding: 30px; }
-
         .music-note {
             font-size: 4rem;
             animation: bounce 1s infinite alternate;
             display: inline-block;
         }
-
         @keyframes bounce {
             from { transform: translateY(0) rotate(-10deg); }
             to   { transform: translateY(-20px) rotate(10deg); }
         }
-
         .waiting-players {
             display: flex;
             flex-wrap: wrap;
@@ -469,7 +460,6 @@
             justify-content: center;
             margin-top: 20px;
         }
-
         .waiting-player-tag {
             background: var(--pastel-green);
             color: var(--text-dark);
@@ -485,7 +475,6 @@
             gap: 15px;
             margin-bottom: 25px;
         }
-
         .reveal-stat-card {
             background: rgba(255,255,255,0.8);
             border-radius: 20px;
@@ -493,7 +482,6 @@
             border: 2px solid var(--pastel-purple);
             text-align: center;
         }
-
         .reveal-stat-card .stat-num   { font-size: 2.5rem; color: #c9a0f5; }
         .reveal-stat-card .stat-label { font-size: 1rem;   color: var(--text-medium); }
 
@@ -505,11 +493,9 @@
             gap: 15px;
             margin: 30px 0;
         }
-
         .podium-item  { text-align: center; flex: 1; max-width: 180px; }
         .podium-name  { font-size: 1.1rem; color: var(--text-dark); margin-bottom: 8px; }
         .podium-score { font-size: 1.5rem; color: #c9a0f5; margin-bottom: 8px; }
-
         .podium-block {
             border-radius: 15px 15px 0 0;
             display: flex;
@@ -517,7 +503,6 @@
             justify-content: center;
             font-size: 2rem;
         }
-
         .podium-1 .podium-block { height: 120px; background: linear-gradient(135deg, #FFD700, #FFA500); }
         .podium-2 .podium-block { height: 90px;  background: linear-gradient(135deg, #C0C0C0, #A0A0A0); }
         .podium-3 .podium-block { height: 70px;  background: linear-gradient(135deg, #CD7F32, #A0522D); }
@@ -525,8 +510,7 @@
         /* 토스트 */
         .toast {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            top: 20px; right: 20px;
             background: rgba(255,255,255,0.95);
             border-radius: 15px;
             padding: 15px 25px;
@@ -537,7 +521,6 @@
             animation: slideIn 0.3s ease;
             border-left: 4px solid #c9a0f5;
         }
-
         @keyframes slideIn {
             from { transform: translateX(100px); opacity: 0; }
             to   { transform: translateX(0);     opacity: 1; }
@@ -554,12 +537,10 @@
             background: rgba(255,255,255,0.5);
             margin-bottom: 15px;
         }
-
         .file-upload-area:hover {
             border-color: #c9a0f5;
             background: rgba(201,160,245,0.1);
         }
-
         .file-upload-area .upload-icon { font-size: 2.5rem; margin-bottom: 10px; }
         .file-upload-area p { color: var(--text-medium); font-size: 1rem; }
 
@@ -586,7 +567,6 @@
             gap: 10px;
             margin-top: 15px;
         }
-
         .player-answer-card {
             background: rgba(255,255,255,0.8);
             border-radius: 15px;
@@ -595,19 +575,31 @@
             border: 2px solid var(--pastel-purple);
             color: var(--text-dark);
         }
-
         .player-answer-card .p-name   { font-size: 1rem;  margin-bottom: 5px; }
         .player-answer-card .p-choice { font-size: 0.9rem; color: var(--text-medium); }
 
         .login-box { max-width: 400px; margin: 0 auto; }
         .join-box  { max-width: 450px; margin: 0 auto; }
 
+        /* 방코드 표시 배지 */
+        .room-code-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #c9a0f5, #a0c4f5);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 15px;
+            font-size: 1.8rem;
+            letter-spacing: 5px;
+            margin: 10px 0;
+        }
+
         @media (max-width: 600px) {
-            .card            { padding: 25px 20px; }
-            .title-main      { font-size: 2rem; }
+            .card              { padding: 25px 20px; }
+            .title-main        { font-size: 2rem; }
             .options-container { grid-template-columns: 1fr; }
-            .options-grid    { grid-template-columns: 1fr; }
-            .final-podium    { flex-direction: column; align-items: center; }
+            .options-grid      { grid-template-columns: 1fr; }
+            .final-podium      { flex-direction: column; align-items: center; }
+            .player-select-grid{ grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
         }
     </style>
 </head>
@@ -627,7 +619,7 @@
             <div class="mode-card" onclick="showScreen('screen-player-join')">
                 <div class="icon">🎧</div>
                 <h3>참가자</h3>
-                <p>음악을 듣고<br>단어를 골라요</p>
+                <p>이름을 클릭해서<br>입장해요</p>
             </div>
         </div>
     </div>
@@ -646,7 +638,7 @@
             <label>비밀번호 확인</label>
             <input type="password" id="admin-password-confirm" placeholder="비밀번호를 다시 입력하세요">
             <div style="display:flex; gap:10px; margin-top:10px;">
-                <button class="btn btn-primary" style="flex:1" onclick="createRoom()">방 만들기</button>
+                <button class="btn btn-primary"   style="flex:1" onclick="createRoom()">방 만들기</button>
                 <button class="btn btn-secondary" style="flex:1" onclick="showScreen('screen-entry')">뒤로</button>
             </div>
             <div class="divider"></div>
@@ -666,9 +658,8 @@
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; flex-wrap:wrap; gap:10px;">
             <div>
                 <div class="title-main" style="font-size:2rem; margin-bottom:5px;">🎛️ 관리자 대시보드</div>
-                <div style="color:var(--text-medium);">방 코드:
-                    <strong id="display-room-code" style="color:#c9a0f5; font-size:1.5rem; letter-spacing:3px;"></strong>
-                </div>
+                <div style="color:var(--text-medium);">방 코드</div>
+                <div class="room-code-badge" id="display-room-code"></div>
             </div>
             <button class="btn btn-danger btn-small" onclick="adminLogout()">나가기</button>
         </div>
@@ -751,19 +742,24 @@
     </div>
 </div>
 
-<!-- 참가자 입장 -->
+<!-- ===== 참가자 입장 (방코드 입력) ===== -->
 <div id="screen-player-join" class="screen">
     <div class="card">
         <div class="title-main">🎧 참가자 입장</div>
-        <div class="title-sub">음악을 듣고 단어를 골라요</div>
+        <div class="title-sub">방 코드를 입력하면 이름을 선택할 수 있어요</div>
         <div class="join-box">
             <label>방 코드</label>
-            <input type="text" id="player-room-code" placeholder="방 코드를 입력하세요" style="text-transform:uppercase">
-            <label>내 이름</label>
-            <input type="text" id="player-name" placeholder="이름을 입력하세요">
-            <div style="display:flex; gap:10px; margin-top:10px;">
-                <button class="btn btn-primary"   style="flex:1" onclick="playerJoin()">입장하기 🎵</button>
-                <button class="btn btn-secondary" style="flex:1" onclick="showScreen('screen-entry')">뒤로</button>
+            <div style="display:flex; gap:10px;">
+                <input type="text" id="player-room-code" placeholder="방 코드 6자리"
+                    style="margin-bottom:0; flex:1; text-transform:uppercase">
+                <button class="btn btn-primary btn-small" onclick="loadRoomForPlayer()">확인</button>
+            </div>
+            <div id="player-name-section" style="display:none; margin-top:25px;">
+                <div class="section-title">👇 내 이름을 클릭하세요!</div>
+                <div class="player-select-grid" id="player-select-grid"></div>
+            </div>
+            <div style="margin-top:20px;">
+                <button class="btn btn-secondary btn-small" onclick="showScreen('screen-entry')">← 뒤로</button>
             </div>
         </div>
     </div>
@@ -775,8 +771,8 @@
         <div class="title-main">🎵 스테레오 마인드</div>
         <div class="waiting-animation"><span class="music-note">🎵</span></div>
         <div class="title-sub">선생님이 게임을 시작할 때까지 기다려요!</div>
-        <div class="info-box" style="text-align:center;">
-            <strong id="waiting-player-name"></strong>님, 입장 완료! 🎉
+        <div class="info-box" style="text-align:center; font-size:1.3rem;">
+            🎧 <strong id="waiting-player-name"></strong>님, 입장 완료! 🎉
         </div>
         <div style="text-align:center; margin-bottom:15px; color:var(--text-medium);">현재 접속한 친구들</div>
         <div class="waiting-players" id="waiting-players-list"></div>
@@ -788,7 +784,7 @@
     <div class="card">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; flex-wrap:wrap; gap:10px;">
             <div>
-                <div id="game-q-num" style="font-size:1rem; color:var(--text-medium); margin-bottom:5px;">문제 1 / 3</div>
+                <div id="game-q-num"   style="font-size:1rem; color:var(--text-medium); margin-bottom:5px;">문제 1 / 3</div>
                 <div id="game-q-title" style="font-size:1.8rem; color:var(--text-dark);">이 음악을 들으면 무엇이 떠오르나요?</div>
             </div>
             <div class="timer-section">
@@ -812,7 +808,7 @@
     <div class="card">
         <div style="text-align:center;">
             <div style="font-size:2rem; color:var(--text-dark); margin-bottom:20px;">🔍 결과 공개!</div>
-            <div class="reveal-stats" id="reveal-stats"></div>
+            <div class="reveal-stats"        id="reveal-stats"></div>
             <div id="reveal-options-result"></div>
             <div id="my-result-box" style="margin:20px 0; padding:20px; border-radius:20px; font-size:1.3rem;"></div>
             <div style="color:var(--text-medium); font-size:1rem;">다음 문제를 기다려요... 🎵</div>
@@ -825,9 +821,9 @@
     <div class="card">
         <div class="title-main">🏆 최종 결과</div>
         <div class="title-sub">수고했어요! 결과를 확인해보세요</div>
-        <div class="final-podium" id="final-podium"></div>
+        <div class="final-podium"  id="final-podium"></div>
         <div class="divider"></div>
-        <div class="scoreboard" id="final-scoreboard"></div>
+        <div class="scoreboard"    id="final-scoreboard"></div>
         <div style="text-align:center; margin-top:30px;">
             <button class="btn btn-primary" onclick="showScreen('screen-entry')">처음으로 🏠</button>
         </div>
@@ -840,7 +836,7 @@
 
 <script>
     /* ===== Firebase 초기화 ===== */
-    const firebaseConfig = {
+    var firebaseConfig = {
         apiKey: "AIzaSyC4DmP5xSITDs7wY1fPR_bScNqbqUx7UXo",
         authDomain: "classroommafia.firebaseapp.com",
         databaseURL: "https://classroommafia-default-rtdb.asia-southeast1.firebasedatabase.app",
@@ -849,26 +845,24 @@
         messagingSenderId: "303384179715",
         appId: "1:303384179715:web:e02f38817efd9fea83ca36"
     };
-
     firebase.initializeApp(firebaseConfig);
     var db = firebase.database();
 
     /* ===== 전역 상태 ===== */
-    var currentRoom      = null;
-    var currentUser      = null;
-    var isAdmin          = false;
-    var timerInterval    = null;
-    var gameListener     = null;
-    var selectedOption   = null;
+    var currentRoom       = null;
+    var currentUser       = null;
+    var isAdmin           = false;
+    var timerInterval     = null;
+    var gameListener      = null;
+    var selectedOption    = null;
     var currentRoundShown = 0;
 
     /* ===== 유틸 ===== */
     function generateRoomCode() {
         var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
         var code  = '';
-        for (var i = 0; i < 6; i++) {
+        for (var i = 0; i < 6; i++)
             code += chars[Math.floor(Math.random() * chars.length)];
-        }
         return code;
     }
 
@@ -877,33 +871,27 @@
         var old = document.querySelector('.toast');
         if (old) old.remove();
         var t = document.createElement('div');
-        t.className   = 'toast';
+        t.className = 'toast';
         t.textContent = msg;
         document.body.appendChild(t);
         setTimeout(function() { if (t.parentNode) t.remove(); }, duration);
     }
 
     function showScreen(id) {
-        document.querySelectorAll('.screen').forEach(function(s) {
-            s.classList.remove('active');
-        });
+        document.querySelectorAll('.screen').forEach(function(s) { s.classList.remove('active'); });
         document.getElementById(id).classList.add('active');
     }
 
     function switchTab(tabId, btn) {
-        document.querySelectorAll('.tab-content').forEach(function(t) {
-            t.classList.remove('active');
-        });
-        document.querySelectorAll('.tab-btn').forEach(function(b) {
-            b.classList.remove('active');
-        });
+        document.querySelectorAll('.tab-content').forEach(function(t) { t.classList.remove('active'); });
+        document.querySelectorAll('.tab-btn').forEach(function(b)     { b.classList.remove('active'); });
         document.getElementById(tabId).classList.add('active');
         btn.classList.add('active');
     }
 
     function getYoutubeEmbedUrl(url) {
         if (!url) return '';
-        var videoId  = '';
+        var videoId = '';
         var patterns = [
             /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/,
             /youtube\.com\/shorts\/([^&\n?#]+)/
@@ -912,9 +900,7 @@
             var m = url.match(patterns[i]);
             if (m) { videoId = m[1]; break; }
         }
-        return videoId
-            ? 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0'
-            : '';
+        return videoId ? 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0' : '';
     }
 
     /* ===== 관리자 - 방 만들기 ===== */
@@ -923,52 +909,44 @@
         var password        = document.getElementById('admin-password').value;
         var passwordConfirm = document.getElementById('admin-password-confirm').value;
 
-        if (!roomName)                  return showToast('방 이름을 입력해주세요!');
-        if (!password)                  return showToast('비밀번호를 입력해주세요!');
+        if (!roomName)                    return showToast('방 이름을 입력해주세요!');
+        if (!password)                    return showToast('비밀번호를 입력해주세요!');
         if (password !== passwordConfirm) return showToast('비밀번호가 일치하지 않아요!');
 
         var roomCode = generateRoomCode();
-        var roomData = {
+        db.ref('stereo_rooms/' + roomCode).set({
             name: roomName, password: password, code: roomCode,
             status: 'waiting', currentRound: 0, totalRounds: 0,
             createdAt: Date.now()
-        };
-
-        db.ref('stereo_rooms/' + roomCode).set(roomData)
-            .then(function() {
-                currentRoom = roomCode;
-                isAdmin     = true;
-                document.getElementById('display-room-code').textContent = roomCode;
-                showScreen('screen-admin-dashboard');
-                generateQuestions(null);
-                listenToRoom();
-                showToast('방이 만들어졌어요! 코드: ' + roomCode);
-            })
-            .catch(function(e) { showToast('방 만들기 실패: ' + e.message); });
+        }).then(function() {
+            currentRoom = roomCode;
+            isAdmin     = true;
+            document.getElementById('display-room-code').textContent = roomCode;
+            showScreen('screen-admin-dashboard');
+            generateQuestions(null);
+            listenToRoom();
+            showToast('방이 만들어졌어요! 코드: ' + roomCode);
+        }).catch(function(e) { showToast('방 만들기 실패: ' + e.message); });
     }
 
     /* ===== 관리자 - 기존 방 입장 ===== */
     function adminLogin() {
         var code     = document.getElementById('admin-room-code').value.trim().toUpperCase();
         var password = document.getElementById('admin-login-password').value;
-
         if (!code || !password) return showToast('방 코드와 비밀번호를 입력해주세요!');
 
-        db.ref('stereo_rooms/' + code).get()
-            .then(function(snap) {
-                if (!snap.exists())              return showToast('존재하지 않는 방이에요!');
-                var room = snap.val();
-                if (room.password !== password)  return showToast('비밀번호가 틀렸어요!');
-
-                currentRoom = code;
-                isAdmin     = true;
-                document.getElementById('display-room-code').textContent = code;
-                showScreen('screen-admin-dashboard');
-                loadAdminData(room);
-                listenToRoom();
-                showToast('관리자로 입장했어요!');
-            })
-            .catch(function(e) { showToast('입장 실패: ' + e.message); });
+        db.ref('stereo_rooms/' + code).get().then(function(snap) {
+            if (!snap.exists())             return showToast('존재하지 않는 방이에요!');
+            var room = snap.val();
+            if (room.password !== password) return showToast('비밀번호가 틀렸어요!');
+            currentRoom = code;
+            isAdmin     = true;
+            document.getElementById('display-room-code').textContent = code;
+            showScreen('screen-admin-dashboard');
+            loadAdminData(room);
+            listenToRoom();
+            showToast('관리자로 입장했어요!');
+        }).catch(function(e) { showToast('입장 실패: ' + e.message); });
     }
 
     function loadAdminData(room) {
@@ -983,12 +961,11 @@
     }
 
     function adminLogout() {
-        if (gameListener && currentRoom) {
+        if (gameListener && currentRoom)
             db.ref('stereo_rooms/' + currentRoom).off('value', gameListener);
-            gameListener = null;
-        }
-        currentRoom = null;
-        isAdmin     = false;
+        gameListener = null;
+        currentRoom  = null;
+        isAdmin      = false;
         showScreen('screen-entry');
     }
 
@@ -998,8 +975,7 @@
         if (!file) return;
         var reader = new FileReader();
         reader.onload = function(e) {
-            var names = e.target.result
-                .split(/[\n,]/)
+            var names = e.target.result.split(/[\n,]/)
                 .map(function(n) { return n.trim(); })
                 .filter(function(n) { return n.length > 0; });
             clearParticipants();
@@ -1023,7 +999,6 @@
         var list  = document.getElementById('participant-list');
         var empty = document.getElementById('participant-empty');
         if (empty) empty.remove();
-
         var tag = document.createElement('div');
         tag.className    = 'participant-tag';
         tag.dataset.name = name;
@@ -1068,13 +1043,13 @@
             for (var j = 0; j < 4; j++) {
                 optHtml +=
                     '<div class="option-input-wrap">' +
-                    '  <div class="option-num">' + (j+1) + '</div>' +
-                    '  <input type="text" class="q-option-input" placeholder="보기 ' + (j+1) + '" value="' + (opts[j]||'') + '">' +
+                    '<div class="option-num">' + (j+1) + '</div>' +
+                    '<input type="text" class="q-option-input" placeholder="보기 ' + (j+1) + '" value="' + (opts[j]||'') + '">' +
                     '</div>';
             }
 
             var qDiv = document.createElement('div');
-            qDiv.className    = 'question-item';
+            qDiv.className     = 'question-item';
             qDiv.dataset.index = i;
             qDiv.innerHTML =
                 '<div class="question-header"><h4>🎵 문제 ' + (i+1) + '</h4></div>' +
@@ -1084,7 +1059,6 @@
                 '<input type="text" class="q-youtube-input" placeholder="https://www.youtube.com/watch?v=..." value="' + ytUrl + '">' +
                 '<label>보기 단어 (4개)</label>' +
                 '<div class="options-grid">' + optHtml + '</div>';
-
             container.appendChild(qDiv);
         }
     }
@@ -1092,7 +1066,6 @@
     /* ===== 문제 저장 ===== */
     function saveQuestions() {
         if (!currentRoom) return showToast('방이 없어요!');
-
         var items     = document.querySelectorAll('.question-item');
         var questions = [];
         var valid     = true;
@@ -1103,23 +1076,18 @@
             var youtubeUrl = item.querySelector('.q-youtube-input').value.trim();
             var options    = Array.from(item.querySelectorAll('.q-option-input'))
                                   .map(function(i) { return i.value.trim(); });
-
             if (options.filter(function(o) { return o; }).length < 2) {
                 showToast('문제 ' + (idx+1) + ': 보기를 2개 이상 입력해주세요!');
-                valid = false;
-                return;
+                valid = false; return;
             }
             questions.push({ title: title, youtubeUrl: youtubeUrl, options: options });
         });
 
         if (!valid) return;
-
         db.ref('stereo_rooms/' + currentRoom).update({
-            questions: questions,
-            totalRounds: questions.length
-        }).then(function() {
-            showToast('문제가 저장되었어요! ✅');
-        }).catch(function(e) { showToast('저장 실패: ' + e.message); });
+            questions: questions, totalRounds: questions.length
+        }).then(function() { showToast('문제가 저장되었어요! ✅'); })
+          .catch(function(e) { showToast('저장 실패: ' + e.message); });
     }
 
     /* ===== 게임 시작 ===== */
@@ -1128,89 +1096,82 @@
         var names = getParticipantNames();
         if (names.length === 0) return showToast('참가자를 먼저 추가해주세요!');
 
-        db.ref('stereo_rooms/' + currentRoom + '/questions').get()
-            .then(function(snap) {
-                if (!snap.exists() || !snap.val() || snap.val().length === 0)
-                    return Promise.reject(new Error('문제를 먼저 저장해주세요!'));
+        db.ref('stereo_rooms/' + currentRoom + '/questions').get().then(function(snap) {
+            if (!snap.exists() || !snap.val() || snap.val().length === 0)
+                return Promise.reject(new Error('문제를 먼저 저장해주세요!'));
 
-                var scores = {}, participants = {};
-                names.forEach(function(name) {
-                    scores[name]       = 0;
-                    participants[name] = { name: name, score: 0 };
-                });
-
-                return db.ref('stereo_rooms/' + currentRoom).update({
-                    status: 'playing', currentRound: 1,
-                    scores: scores, participants: participants,
-                    answers: null, revealData: null
-                });
-            })
-            .then(function() { showToast('게임 시작! 🎮'); })
-            .catch(function(e) { showToast(e.message); });
+            var scores = {}, participants = {};
+            names.forEach(function(name) {
+                scores[name]       = 0;
+                participants[name] = { name: name, score: 0 };
+            });
+            return db.ref('stereo_rooms/' + currentRoom).update({
+                status: 'playing', currentRound: 1,
+                scores: scores, participants: participants,
+                answers: null, revealData: null
+            });
+        }).then(function() { showToast('게임 시작! 🎮'); })
+          .catch(function(e) { showToast(e.message); });
     }
 
     /* ===== 다음 문제 ===== */
     function nextRound() {
         if (!currentRoom) return;
-        db.ref('stereo_rooms/' + currentRoom).get()
-            .then(function(snap) {
-                var room = snap.val();
-                var next = (room.currentRound || 0) + 1;
-                if (next > room.totalRounds) return showToast('마지막 문제예요! 게임 종료를 눌러주세요.');
-                return db.ref('stereo_rooms/' + currentRoom)
-                    .update({ currentRound: next, status: 'playing' })
-                    .then(function() { showToast('문제 ' + next + ' 시작!'); });
-            });
+        db.ref('stereo_rooms/' + currentRoom).get().then(function(snap) {
+            var room = snap.val();
+            var next = (room.currentRound || 0) + 1;
+            if (next > room.totalRounds) return showToast('마지막 문제예요! 게임 종료를 눌러주세요.');
+            return db.ref('stereo_rooms/' + currentRoom)
+                .update({ currentRound: next, status: 'playing' })
+                .then(function() { showToast('문제 ' + next + ' 시작!'); });
+        });
     }
 
     /* ===== 결과 공개 ===== */
     function revealAnswers() {
         if (!currentRoom) return;
-        db.ref('stereo_rooms/' + currentRoom).get()
-            .then(function(snap) {
-                var room         = snap.val();
-                var round        = room.currentRound;
-                var roundAnswers = (room.answers && room.answers['round' + round]) || {};
-                var currentQ     = room.questions[round - 1];
+        db.ref('stereo_rooms/' + currentRoom).get().then(function(snap) {
+            var room         = snap.val();
+            var round        = room.currentRound;
+            var roundAnswers = (room.answers && room.answers['round' + round]) || {};
+            var currentQ     = room.questions[round - 1];
 
-                var optionCounts = {};
-                currentQ.options.forEach(function(_, i) { optionCounts[i] = 0; });
-                Object.values(roundAnswers).forEach(function(ans) {
-                    if (ans.optionIndex !== undefined)
-                        optionCounts[ans.optionIndex] = (optionCounts[ans.optionIndex] || 0) + 1;
-                });
+            var optionCounts = {};
+            currentQ.options.forEach(function(_, i) { optionCounts[i] = 0; });
+            Object.values(roundAnswers).forEach(function(ans) {
+                if (ans.optionIndex !== undefined)
+                    optionCounts[ans.optionIndex] = (optionCounts[ans.optionIndex] || 0) + 1;
+            });
 
-                var maxCount     = Math.max.apply(null, Object.values(optionCounts));
-                var winnerOptions = Object.keys(optionCounts)
-                    .filter(function(k) { return optionCounts[k] === maxCount && maxCount > 0; })
-                    .map(Number);
+            var maxCount      = Math.max.apply(null, Object.values(optionCounts));
+            var winnerOptions = Object.keys(optionCounts)
+                .filter(function(k) { return optionCounts[k] === maxCount && maxCount > 0; })
+                .map(Number);
 
-                var updates = { status: 'revealing' };
-                updates['revealData/round' + round] = { optionCounts: optionCounts, winnerOptions: winnerOptions };
-
-                Object.entries(roundAnswers).forEach(function(entry) {
-                    var playerName = entry[0], ans = entry[1];
-                    if (winnerOptions.indexOf(ans.optionIndex) !== -1) {
-                        var cur = (room.scores && room.scores[playerName]) || 0;
-                        updates['scores/' + playerName]                       = cur + 1;
-                        updates['participants/' + playerName + '/score']      = cur + 1;
-                    }
-                });
-
-                return db.ref('stereo_rooms/' + currentRoom).update(updates);
-            })
-            .then(function() { showToast('결과 공개! 🔍'); })
-            .catch(function(e) { showToast('오류: ' + e.message); });
+            var updates = {
+                status: 'revealing',
+                ['revealData/round' + round]: { optionCounts: optionCounts, winnerOptions: winnerOptions }
+            };
+            Object.entries(roundAnswers).forEach(function(entry) {
+                var playerName = entry[0], ans = entry[1];
+                if (winnerOptions.indexOf(ans.optionIndex) !== -1) {
+                    var cur = (room.scores && room.scores[playerName]) || 0;
+                    updates['scores/' + playerName]                  = cur + 1;
+                    updates['participants/' + playerName + '/score'] = cur + 1;
+                }
+            });
+            return db.ref('stereo_rooms/' + currentRoom).update(updates);
+        }).then(function() { showToast('결과 공개! 🔍'); })
+          .catch(function(e) { showToast('오류: ' + e.message); });
     }
 
-    /* ===== 게임 종료 ===== */
+    /* ===== 게임 종료 / 초기화 ===== */
     function endGame() {
         if (!currentRoom) return;
         db.ref('stereo_rooms/' + currentRoom).update({ status: 'finished' })
             .then(function() { showToast('게임 종료! 🏁'); });
     }
 
-    /* ===== 초기화 ===== */
     function resetGame() {
         if (!currentRoom) return;
         if (!confirm('게임을 초기화할까요?')) return;
@@ -1224,7 +1185,6 @@
     function listenToRoom() {
         if (gameListener && currentRoom)
             db.ref('stereo_rooms/' + currentRoom).off('value', gameListener);
-
         gameListener = db.ref('stereo_rooms/' + currentRoom).on('value', function(snap) {
             if (!snap.exists()) return;
             updateAdminUI(snap.val());
@@ -1233,15 +1193,12 @@
 
     function updateAdminUI(room) {
         var statusMap = {
-            waiting:   '대기 중 ⏳',
-            playing:   '진행 중 🎵',
-            revealing: '결과 공개 중 🔍',
-            finished:  '게임 종료 🏁'
+            waiting: '대기 중 ⏳', playing: '진행 중 🎵',
+            revealing: '결과 공개 중 🔍', finished: '게임 종료 🏁'
         };
         document.getElementById('admin-game-status').textContent = statusMap[room.status] || room.status;
         document.getElementById('admin-round-info').textContent  =
             room.currentRound > 0 ? room.currentRound + ' / ' + room.totalRounds + ' 문제' : '';
-
         updateAdminLiveResults(room);
         updateAdminScoreboard(room);
     }
@@ -1249,16 +1206,14 @@
     function updateAdminLiveResults(room) {
         var container = document.getElementById('admin-live-results');
         var round     = room.currentRound;
-
         if (!round || !room.questions) {
             container.innerHTML = '<div style="color:var(--text-medium);">게임을 시작하면 실시간 응답이 표시됩니다.</div>';
             return;
         }
-
-        var currentQ        = room.questions[round - 1];
-        var roundAnswers    = (room.answers && room.answers['round' + round]) || {};
+        var currentQ          = room.questions[round - 1];
+        var roundAnswers      = (room.answers && room.answers['round' + round]) || {};
         var totalParticipants = Object.keys(room.participants || {}).length;
-        var answeredCount   = Object.keys(roundAnswers).length;
+        var answeredCount     = Object.keys(roundAnswers).length;
 
         var optionCounts = {};
         currentQ.options.forEach(function(_, i) { optionCounts[i] = 0; });
@@ -1272,25 +1227,18 @@
             var count = optionCounts[i] || 0;
             var pct   = totalParticipants > 0 ? Math.round((count / totalParticipants) * 100) : 0;
             html += '<div class="result-bar-item">' +
-                    '  <div class="result-bar-label">' + (i+1) + '. ' + opt + '</div>' +
-                    '  <div class="result-bar-track">' +
-                    '    <div class="result-bar-fill" style="width:' + pct + '%">' + (count > 0 ? count + '명' : '') + '</div>' +
-                    '  </div>' +
-                    '</div>';
+                    '<div class="result-bar-label">' + (i+1) + '. ' + opt + '</div>' +
+                    '<div class="result-bar-track"><div class="result-bar-fill" style="width:' + pct + '%">' +
+                    (count > 0 ? count + '명' : '') + '</div></div></div>';
         });
         html += '</div>';
         container.innerHTML = html;
 
-        /* 참가자별 선택 */
         var playerHtml = '';
         Object.keys(room.participants || {}).forEach(function(name) {
             var ans    = roundAnswers[name];
             var choice = ans ? ((ans.optionIndex + 1) + '. ' + currentQ.options[ans.optionIndex]) : '⏳ 미응답';
-            playerHtml +=
-                '<div class="player-answer-card">' +
-                '  <div class="p-name">'   + name   + '</div>' +
-                '  <div class="p-choice">' + choice + '</div>' +
-                '</div>';
+            playerHtml += '<div class="player-answer-card"><div class="p-name">' + name + '</div><div class="p-choice">' + choice + '</div></div>';
         });
         document.getElementById('admin-player-answers').innerHTML =
             playerHtml || '<div style="color:var(--text-medium);">참가자 없음</div>';
@@ -1305,48 +1253,70 @@
         var sorted     = Object.entries(room.scores).sort(function(a,b) { return b[1]-a[1]; });
         var medals     = ['🥇','🥈','🥉'];
         var topClasses = ['top-1','top-2','top-3'];
-
         container.innerHTML = sorted.map(function(entry, i) {
             return '<div class="score-item ' + (topClasses[i]||'') + '">' +
-                   '  <div class="score-rank">'   + (medals[i]||(i+1)+'위') + '</div>' +
-                   '  <div class="score-name">'   + entry[0] + '</div>' +
-                   '  <div class="score-points">' + entry[1] + '점</div>' +
-                   '</div>';
+                   '<div class="score-rank">'   + (medals[i]||(i+1)+'위') + '</div>' +
+                   '<div class="score-name">'   + entry[0] + '</div>' +
+                   '<div class="score-points">' + entry[1] + '점</div></div>';
         }).join('');
     }
 
-    /* ===== 참가자 입장 ===== */
-    function playerJoin() {
+    /* ===== 참가자 - 방코드 확인 후 이름 목록 표시 (NEW) ===== */
+    function loadRoomForPlayer() {
         var code = document.getElementById('player-room-code').value.trim().toUpperCase();
-        var name = document.getElementById('player-name').value.trim();
+        if (!code) return showToast('방 코드를 입력해주세요!');
 
-        if (!code || !name) return showToast('방 코드와 이름을 입력해주세요!');
+        db.ref('stereo_rooms/' + code).get().then(function(snap) {
+            if (!snap.exists()) return showToast('존재하지 않는 방이에요!');
 
-        db.ref('stereo_rooms/' + code).get()
-            .then(function(snap) {
-                if (!snap.exists()) return Promise.reject(new Error('존재하지 않는 방이에요!'));
+            var room         = snap.val();
+            var participants = room.participants || {};
+            var names        = Object.keys(participants);
 
-                var room         = snap.val();
-                var participants = room.participants || {};
+            if (names.length === 0) return showToast('아직 참가자 명단이 없어요! 선생님께 문의하세요.');
 
-                if (Object.keys(participants).length > 0 && !participants[name])
-                    return Promise.reject(new Error('참가자 명단에 없는 이름이에요!'));
+            /* 이름 카드 그리드 생성 */
+            var grid = document.getElementById('player-select-grid');
+            grid.innerHTML = '';
 
-                currentRoom = code;
-                currentUser = name;
-                isAdmin     = false;
+            /* 이미 온라인인 참가자 체크 */
+            names.sort().forEach(function(name) {
+                var p       = participants[name];
+                var isOnline = p.online === true;
 
-                return db.ref('stereo_rooms/' + code + '/participants/' + name).update({
-                    name: name, online: true, joinedAt: Date.now()
-                });
-            })
-            .then(function() {
-                document.getElementById('waiting-player-name').textContent = currentUser;
-                showScreen('screen-player-waiting');
-                listenToGameState();
-                showToast(currentUser + '님, 환영해요! 🎉');
-            })
-            .catch(function(e) { showToast(e.message); });
+                var card = document.createElement('div');
+                card.className = 'player-select-card' + (isOnline ? ' already-in' : '');
+                card.innerHTML =
+                    '<div class="ps-icon">🎧</div>' +
+                    '<div class="ps-name">' + name + '</div>' +
+                    (isOnline ? '<div style="font-size:0.8rem; color:#5a9a7a; margin-top:4px;">접속 중</div>' : '');
+
+                (function(n) {
+                    card.onclick = function() { joinAsPlayer(code, n); };
+                })(name);
+
+                grid.appendChild(card);
+            });
+
+            document.getElementById('player-name-section').style.display = 'block';
+            showToast('방을 찾았어요! 이름을 클릭하세요 😊');
+        }).catch(function(e) { showToast('오류: ' + e.message); });
+    }
+
+    /* ===== 참가자 - 이름 클릭으로 입장 (NEW) ===== */
+    function joinAsPlayer(code, name) {
+        currentRoom = code;
+        currentUser = name;
+        isAdmin     = false;
+
+        db.ref('stereo_rooms/' + code + '/participants/' + name).update({
+            name: name, online: true, joinedAt: Date.now()
+        }).then(function() {
+            document.getElementById('waiting-player-name').textContent = name;
+            showScreen('screen-player-waiting');
+            listenToGameState();
+            showToast(name + '님, 환영해요! 🎉');
+        }).catch(function(e) { showToast('입장 실패: ' + e.message); });
     }
 
     /* ===== 참가자 게임 상태 리스너 ===== */
@@ -1356,11 +1326,11 @@
 
         gameListener = db.ref('stereo_rooms/' + currentRoom).on('value', function(snap) {
             if (!snap.exists()) return;
-            var room = snap.val();
-
-            /* 대기 화면 참가자 목록 */
+            var room    = snap.val();
             var list    = document.getElementById('waiting-players-list');
-            var players = Object.keys(room.participants || {});
+            var players = Object.keys(room.participants || {}).filter(function(n) {
+                return room.participants[n].online;
+            });
             list.innerHTML = players.length
                 ? players.map(function(n) { return '<div class="waiting-player-tag">' + n + '</div>'; }).join('')
                 : '<div style="color:var(--text-medium);">아직 아무도 없어요</div>';
@@ -1375,7 +1345,6 @@
     /* ===== 참가자 게임 화면 ===== */
     function showPlayerGame(room) {
         var round = room.currentRound;
-
         if (round !== currentRoundShown) {
             currentRoundShown = round;
             selectedOption    = null;
@@ -1387,14 +1356,8 @@
             var embedUrl    = getYoutubeEmbedUrl(question.youtubeUrl);
             var ytContainer = document.getElementById('youtube-container');
             var ytIframe    = document.getElementById('youtube-iframe');
-
-            if (embedUrl) {
-                ytIframe.src              = embedUrl;
-                ytContainer.style.display = 'block';
-            } else {
-                ytIframe.src              = '';
-                ytContainer.style.display = 'none';
-            }
+            if (embedUrl) { ytIframe.src = embedUrl; ytContainer.style.display = 'block'; }
+            else          { ytIframe.src = '';        ytContainer.style.display = 'none'; }
 
             var optContainer = document.getElementById('options-container');
             optContainer.innerHTML = '';
@@ -1404,26 +1367,21 @@
                 btn.className = 'option-btn';
                 btn.id        = 'opt-btn-' + i;
                 btn.innerHTML = '<span class="opt-num">' + (i+1) + '</span>' + opt;
-                (function(idx) {
-                    btn.onclick = function() { selectOption(idx); };
-                })(i);
+                (function(idx) { btn.onclick = function() { selectOption(idx); }; })(i);
                 optContainer.appendChild(btn);
             });
 
             var ss = document.getElementById('submit-status');
             ss.style.display = 'none';
             ss.textContent   = '';
-
             startTimer(30);
         }
-
         showScreen('screen-player-game');
     }
 
     function selectOption(index) {
         if (!currentRoom || !currentUser) return;
-        if (selectedOption !== null) return;   /* 중복 선택 방지 */
-
+        if (selectedOption !== null) return;
         selectedOption = index;
 
         document.querySelectorAll('.option-btn').forEach(function(btn, i) {
@@ -1433,24 +1391,23 @@
         db.ref('stereo_rooms/' + currentRoom + '/answers/round' + currentRoundShown + '/' + currentUser)
             .set({ optionIndex: index, answeredAt: Date.now() })
             .then(function() {
-                var q  = db.ref('stereo_rooms/' + currentRoom + '/questions/' + (currentRoundShown - 1));
-                q.get().then(function(snap) {
-                    var question = snap.val();
-                    var ss       = document.getElementById('submit-status');
-                    ss.style.display = 'block';
-                    ss.className     = 'submit-status submitted';
-                    ss.textContent   = '✅ "' + question.options[index] + '" 선택 완료!';
-                    showToast('선택 완료! 결과를 기다려요 🎵');
-                });
+                db.ref('stereo_rooms/' + currentRoom + '/questions/' + (currentRoundShown - 1)).get()
+                    .then(function(snap) {
+                        var q  = snap.val();
+                        var ss = document.getElementById('submit-status');
+                        ss.style.display = 'block';
+                        ss.className     = 'submit-status submitted';
+                        ss.textContent   = '✅ "' + q.options[index] + '" 선택 완료!';
+                        showToast('선택 완료! 결과를 기다려요 🎵');
+                    });
             });
     }
 
     function startTimer(seconds) {
         if (timerInterval) clearInterval(timerInterval);
-        var remaining   = seconds;
+        var remaining    = seconds;
         var timerDisplay = document.getElementById('timer-display');
         var timerCircle  = document.getElementById('timer-circle');
-
         timerDisplay.textContent = remaining;
         timerCircle.classList.remove('urgent');
 
@@ -1458,17 +1415,13 @@
             remaining--;
             timerDisplay.textContent = remaining;
             if (remaining <= 10) timerCircle.classList.add('urgent');
-            if (remaining <= 0) {
-                clearInterval(timerInterval);
-                timerDisplay.textContent = '⏰';
-            }
+            if (remaining <= 0)  { clearInterval(timerInterval); timerDisplay.textContent = '⏰'; }
         }, 1000);
     }
 
     /* ===== 결과 공개 화면 ===== */
     function showPlayerReveal(room) {
         if (timerInterval) clearInterval(timerInterval);
-
         var round      = room.currentRound;
         var question   = room.questions[round - 1];
         var revealData = room.revealData && room.revealData['round' + round];
@@ -1490,23 +1443,17 @@
             var isWinner = winnerOptions.indexOf(i) !== -1;
             optHtml +=
                 '<div class="result-bar-item">' +
-                '  <div class="result-bar-label" style="' + (isWinner ? 'color:#c9a0f5;font-weight:bold;' : '') + '">' +
-                    (isWinner ? '🏆 ' : '') + (i+1) + '. ' + opt +
-                '  </div>' +
-                '  <div class="result-bar-track">' +
-                '    <div class="result-bar-fill" style="width:' + pct + '%;' +
-                        (isWinner ? 'background:linear-gradient(90deg,#a0f5c9,#a0f5e8);' : '') + '">' +
-                        (count > 0 ? pct + '%' : '') +
-                '    </div>' +
-                '  </div>' +
-                '</div>';
+                '<div class="result-bar-label" style="' + (isWinner ? 'color:#c9a0f5;font-weight:bold;' : '') + '">' +
+                (isWinner ? '🏆 ' : '') + (i+1) + '. ' + opt + '</div>' +
+                '<div class="result-bar-track"><div class="result-bar-fill" style="width:' + pct + '%;' +
+                (isWinner ? 'background:linear-gradient(90deg,#a0f5c9,#a0f5e8);' : '') + '">' +
+                (count > 0 ? pct + '%' : '') + '</div></div></div>';
         });
         optHtml += '</div>';
         document.getElementById('reveal-options-result').innerHTML = optHtml;
 
         var myResultBox = document.getElementById('my-result-box');
         var myAnswer    = room.answers && room.answers['round' + round] && room.answers['round' + round][currentUser];
-
         if (myAnswer) {
             var isCorrect = winnerOptions.indexOf(myAnswer.optionIndex) !== -1;
             myResultBox.style.background = isCorrect ? 'rgba(160,245,201,0.3)' : 'rgba(245,160,160,0.2)';
@@ -1519,14 +1466,12 @@
             myResultBox.style.background = 'rgba(200,200,200,0.2)';
             myResultBox.style.border     = '2px solid #ccc';
         }
-
         showScreen('screen-player-reveal');
     }
 
     /* ===== 최종 결과 ===== */
     function showFinalResults(room) {
         if (timerInterval) clearInterval(timerInterval);
-
         var scores = room.scores || {};
         var sorted = Object.entries(scores).sort(function(a,b) { return b[1]-a[1]; });
 
@@ -1540,10 +1485,9 @@
             if (!player) return;
             podiumHtml +=
                 '<div class="podium-item ' + podiumClasses[pos] + '">' +
-                '  <div class="podium-name">'  + player[0] + '</div>' +
-                '  <div class="podium-score">' + player[1] + '점</div>' +
-                '  <div class="podium-block">' + podiumEmojis[pos] + '</div>' +
-                '</div>';
+                '<div class="podium-name">'  + player[0] + '</div>' +
+                '<div class="podium-score">' + player[1] + '점</div>' +
+                '<div class="podium-block">' + podiumEmojis[pos] + '</div></div>';
         });
         document.getElementById('final-podium').innerHTML = podiumHtml;
 
@@ -1551,10 +1495,9 @@
         var topClasses = ['top-1','top-2','top-3'];
         document.getElementById('final-scoreboard').innerHTML = sorted.map(function(entry, i) {
             return '<div class="score-item ' + (topClasses[i]||'') + '">' +
-                   '  <div class="score-rank">'   + (medals[i]||(i+1)+'위') + '</div>' +
-                   '  <div class="score-name">'   + entry[0] + '</div>' +
-                   '  <div class="score-points">' + entry[1] + '점</div>' +
-                   '</div>';
+                   '<div class="score-rank">'   + (medals[i]||(i+1)+'위') + '</div>' +
+                   '<div class="score-name">'   + entry[0] + '</div>' +
+                   '<div class="score-points">' + entry[1] + '점</div></div>';
         }).join('');
 
         showScreen('screen-final');
