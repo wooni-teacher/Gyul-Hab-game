@@ -571,6 +571,15 @@ body::after{
       </div>
     </div>
 
+    <div class="setup-row">
+      <div class="setup-label">학생 화면 공유 (선택)</div>
+      <div id="roomCodeBox" style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+        <input type="text" id="roomCodeInput" maxlength="6" placeholder="방 코드" style="width:110px; text-align:center; font-size:20px; font-weight:900; letter-spacing:2px; padding:8px; border-radius:10px; border:2px solid #8E8577; background:#FDFBF6;">
+        <button class="btn step-btn" id="roomCodeRefreshBtn" type="button" title="새 코드 생성">🔄</button>
+        <span style="font-size:13px; opacity:.75;">학생들이 이 코드를 뷰어 페이지에 입력하면 실시간으로 화면을 볼 수 있어요. 비워두면 공유 안 함.</span>
+      </div>
+    </div>
+
     <button class="btn" id="startBtn">게임 시작</button>
   </div>
 </section>
@@ -580,6 +589,7 @@ body::after{
   <div class="top-bar">
     <div class="round-badge" id="roundBadge">ROUND 1 / 10</div>
     <div class="title-plate"><h1>결! 합!</h1></div>
+    <div class="round-badge" id="liveRoomBadge" style="display:none;">📡 <span id="liveRoomCode"></span></div>
     <button class="btn" id="muteBtn" title="음소거">🔊</button>
   </div>
 
@@ -798,7 +808,7 @@ function remainingSets(){
 /* ---------- 게임 상태 ---------- */
 const state = {
   phase: 'setup',       // setup | turn | calling | bonus | judging | roundEnd | gameEnd
-  settings: { mode:'team', teamCount:4, rounds:10, turnTime:30 }, // turnTime 0 = 무제한
+  settings: { mode:'team', teamCount:4, rounds:10, turnTime:30, roomCode:'' }, // turnTime 0 = 무제한
   teams: [],
   round: 1,
   turnIndex: 0,
@@ -809,7 +819,9 @@ const state = {
   foundList: [],        // 찾은 순서대로 [i,j,k] (표시용)
   roundLog: [],
   timerId: null,
-  lastSnapshot: null    // 직전 판정을 되돌리기 위한 스냅샷
+  lastSnapshot: null,   // 직전 판정을 되돌리기 위한 스냅샷
+  turnEndsAt: null,     // 학생 화면 타이머 동기화용 (현재 턴 종료 예정 시각)
+  overlay: null          // 학생 화면에 보여줄 현재 판정 팝업 정보
 };
 
 /* ---------- 판정 취소용 스냅샷 ----------
@@ -856,6 +868,47 @@ function revertLast(){
   renderFoundBar();
   // 화면 재구성 후, 되돌린 팀의 턴을 다시 시작
   startTurn();
+}
+
+/* ============================================================
+   실시간 학생 화면 공유 (Firebase Realtime Database)
+   ============================================================ */
+function randomRoomCode(){
+  return String(Math.floor(1000 + Math.random() * 9000)); // 4자리
+}
+function initRoomCodeUI(){
+  const inp = $('roomCodeInput');
+  if(inp && !inp.value) inp.value = randomRoomCode();
+  const refresh = $('roomCodeRefreshBtn');
+  if(refresh) refresh.addEventListener('click', ()=>{ inp.value = randomRoomCode(); });
+}
+
+let liveThrottleId = null;
+function pushLive(){
+  const code = state.settings.roomCode;
+  if(!code || typeof db === 'undefined') return;
+  // 짧은 시간에 여러 번 호출돼도 마지막 상태만 100ms 뒤에 한 번 전송
+  clearTimeout(liveThrottleId);
+  liveThrottleId = setTimeout(()=>{
+    const team = state.teams[state.turnIndex] || null;
+    const payload = {
+      updatedAt: Date.now(),
+      phase: state.phase,
+      round: state.round,
+      totalRounds: state.settings.rounds,
+      mode: state.settings.mode,
+      teams: state.teams.map(t => ({ name: t.name, score: t.score })),
+      turnIndex: state.turnIndex,
+      turnTeamName: team ? team.name : null,
+      cards: (state.cards || []).map(c => ({ shape: c.shape, color: c.color, bg: c.bg })),
+      selected: state.selected || [],
+      foundList: state.foundList || [],
+      turnEndsAt: state.turnEndsAt || null,
+      turnTotal: state.settings.turnTime || 0,
+      overlay: state.overlay || null
+    };
+    db.ref('rooms/' + code + '/live').set(payload).catch(()=>{ /* 네트워크 오류는 조용히 무시 */ });
+  }, 100);
 }
 
 /* ---------- DOM 헬퍼 ---------- */
@@ -918,6 +971,7 @@ function bindSetup(){
   });
   sync();
   renderTeamNameInputs();
+  initRoomCodeUI();
 
   $('startBtn').addEventListener('click', ()=>{
     Sound.ensure(); Sound.click();
@@ -931,6 +985,14 @@ function bindSetup(){
       score: 0
     }));
     state.round = 1;
+    s.roomCode = ($('roomCodeInput').value || '').trim();
+    const badge = $('liveRoomBadge');
+    if(s.roomCode){
+      badge.style.display = '';
+      $('liveRoomCode').textContent = s.roomCode;
+    }else{
+      badge.style.display = 'none';
+    }
     startRound();
   });
 }
@@ -946,15 +1008,18 @@ function startTurnTimer(onTimeout){
   clockEl.classList.remove('danger');
   if(total === 0){
     // 무제한 모드
+    state.turnEndsAt = null;
     clockEl.classList.add('infinite');
     secEl.textContent = '∞';
     clockEl.querySelector('.pie').style.setProperty('--deg', '360deg');
+    pushLive();
     return;
   }
   clockEl.classList.remove('infinite');
   let last = total;
   secEl.textContent = total + '초';
   clockEl.querySelector('.pie').style.setProperty('--deg', '360deg');
+  state.turnEndsAt = Date.now() + total * 1000;
   const t0 = performance.now();
   state.timerId = setInterval(()=>{
     const elapsed = (performance.now() - t0) / 1000;
@@ -1014,6 +1079,7 @@ function renderScoreboard(){
       <div class="t-score ${t.score<0?'neg':''}">${t.score}</div>`;
     sb.appendChild(chip);
   });
+  pushLive();
 }
 function escapeHtml(s){ return s.replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
 
@@ -1047,6 +1113,7 @@ function renderFoundBar(){
     });
     list.appendChild(row);
   });
+  pushLive();
 }
 
 function renderCards(withFlipSound){
@@ -1069,6 +1136,7 @@ function renderCards(withFlipSound){
     grid.appendChild(slot);
     if(withFlipSound) Sound.flip(i);
   });
+  pushLive();
 }
 
 function startTurn(){
@@ -1158,6 +1226,7 @@ function onCardClick(i, el){
 function updateCallBar(){
   $('pickCount').textContent = state.selected.length;
   $('judgeBtn').disabled = state.selected.length !== 3;
+  pushLive();
 }
 
 // 선택 취소: 마지막 카드 선택 취소 → 선택이 없으면 합 선언 자체 취소
@@ -1259,6 +1328,8 @@ function onGyeol(){
   $('scanBox').style.display = 'flex';
   $('scanLabel').textContent = '남은 합이 있는지 검사 중…';
   ov.classList.add('show');
+  state.overlay = { main:'', sub:'결! 판정 중…', score:'', cls:'scan' };
+  pushLive();
 
   let count = 0;
   const scanId = setInterval(()=>{
@@ -1289,6 +1360,7 @@ function finishGyeol(remain, team){
     $('ovSub').textContent = `결 성공! — ${team.name}`;
     $('ovScore').style.display = 'inline-flex';
     $('ovScoreVal').textContent = '+3';
+    state.overlay = { main:'남은 합 없음', sub:`결 성공! — ${team.name}`, score:'+3', cls:'good' };
     renderScoreboard();
     Sound.bigFanfare();
     setTimeout(()=>{ hideOverlay(); endRound(); }, 2300);
@@ -1301,6 +1373,7 @@ function finishGyeol(remain, team){
     $('ovSub').textContent = '아직 찾지 못한 합이 숨어 있습니다!';
     $('ovScore').style.display = 'inline-flex';
     $('ovScoreVal').textContent = '-1';
+    state.overlay = { main:'결 실패…', sub:'아직 찾지 못한 합이 숨어 있습니다!', score:'-1', cls:'bad' };
     renderScoreboard();
     Sound.buzzer();
     setTimeout(()=>{ hideOverlay(); nextTurn(); }, 2000);
@@ -1329,12 +1402,17 @@ function showOverlay({main, cls, sub, score, dur=1500}, after){
   }else{
     $('ovScore').style.display = 'none';
   }
+  state.overlay = { main, sub: sub || '', score: score || '', cls: cls || 'info' };
   renderScoreboard();
   $('overlay').classList.add('show');
   clearTimeout(overlayTimeout);
   overlayTimeout = setTimeout(()=>{ hideOverlay(); if(after) after(); }, dur);
 }
-function hideOverlay(){ $('overlay').classList.remove('show'); }
+function hideOverlay(){
+  $('overlay').classList.remove('show');
+  state.overlay = null;
+  pushLive();
+}
 
 /* ============================================================
    라운드 종료 / 최종 결과
@@ -1359,6 +1437,7 @@ function endRound(){
   renderRankList($('roundRanks'), false);
   updateRevertButtons();
   $('nextRoundBtn').textContent = state.round >= state.settings.rounds ? '최종 결과 보기 🏆' : '다음 라운드 ▶';
+  pushLive();
 }
 
 function renderRankList(container, isFinal){
@@ -1400,6 +1479,7 @@ function showFinal(){
   showScreen('finalScreen');
   renderRankList($('finalRanks'), true);
   Sound.bigFanfare();
+  pushLive();
 }
 
 /* ============================================================
